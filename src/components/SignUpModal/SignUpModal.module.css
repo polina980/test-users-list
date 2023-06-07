@@ -1,0 +1,71 @@
+.form {
+  display: flex;
+  position: absolute;
+  flex-direction: column;
+  width: 468px;
+  height: 483px;
+  border-radius: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  gap: 16px;
+  color: #151317;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.title {
+  font-weight: 400;
+  font-size: 20px;
+  margin: 0;
+  color: #151317;
+  cursor: default;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+input {
+  height: 46px;
+  border: 0;
+  border-radius: 8px;
+  padding: 0 8px 0 16px;
+  background: #F8F8F8;
+  color: #808185;
+}
+
+.password {
+  background-image: url(./../../images/eye-off.svg);
+  background-repeat: no-repeat;
+  background-position-x: 438px;
+  background-position-y: center;
+  padding-right: 40px;
+}
+
+.modalButton {
+  height: 48px;
+  border: 0;
+  border-radius: 8px;
+  margin-top: 8px;
+  background: #512689;
+  font-size: 16px;
+  color: #FFFFFF;
+}
+
+.errorInput {
+  border: 1px solid #FF6161;
+}
+
+.errorText {
+  font-size: 10px;
+  color: #FF6161;
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    width: 343px;
+  }
+}

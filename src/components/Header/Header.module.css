@@ -1,0 +1,53 @@
+.header {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 265px;
+  gap: 16px;
+  background: #512689;
+}
+
+h1 {
+  font-size: 64px;
+  font-weight: 400;
+  margin: 0;
+  color: #FFFFFF;
+  cursor: default;
+}
+
+.description {
+  width: 846px;
+  font-size: 20px;
+  margin: 0;
+  color: #F8F8F8;
+  cursor: default;
+}
+
+.exitImage {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 281px;
+  }
+
+  h1 {
+    font-size: 36px;
+  }
+
+  .description {
+    width: 334px;
+    font-size: 16px;
+  }
+
+  .exitImage {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 27px;
+  }
+}

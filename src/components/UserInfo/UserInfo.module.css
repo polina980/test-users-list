@@ -1,0 +1,36 @@
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
+  margin: 49px auto 0;
+  gap: 130.5px;
+}
+
+.description {
+  width: 630px;
+  margin-top: 0;
+}
+
+figcaption {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+figcaption:last-of-type {
+  margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .info {
+    flex-direction: column-reverse;
+    width: fit-content;
+    margin: 33px auto 0;
+    gap: 0;
+  }
+
+  .description {
+    width: 343px;
+    margin-top: 34px;
+  }
+}

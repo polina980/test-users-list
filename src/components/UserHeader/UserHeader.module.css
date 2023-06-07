@@ -1,0 +1,69 @@
+.header {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  height: 265px;
+  gap: 16px;
+  background: #512689;
+}
+
+.user {
+  display: flex;
+  text-align: left;
+  gap: 32px;
+  padding-left: 188px;
+}
+
+.avatar {
+  width: 124px;
+  height: 124px;
+  border-radius: 62px;
+}
+
+.parnter {
+  font-size: 32px;
+  color: #FFFFFF;
+  cursor: default;
+}
+
+.backImage {
+  display: none;
+}
+
+.exitImage {
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    height: 412px;
+  }
+
+  .user {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding-left: 0;
+  }
+
+  .backImage {
+    display: block;
+    position: absolute;
+    top: 23px;
+    left: 27px;
+  }
+
+  .parnter {
+    font-size: 20px;
+  }
+
+  .exitImage {
+    display: block;
+    position: absolute;
+    top: 23px;
+    right: 27px;
+  }
+}
