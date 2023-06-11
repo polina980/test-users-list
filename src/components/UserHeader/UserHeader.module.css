@@ -17,9 +17,9 @@
 }
 
 .avatar {
-  width: 124px;
-  height: 124px;
-  border-radius: 62px;
+  width: 187px;
+  height: 187px;
+  border-radius: 50%;
 }
 
 .parnter {
@@ -45,15 +45,21 @@
     flex-direction: column-reverse;
     align-items: center;
     text-align: center;
-    gap: 16px;
+    gap: 30px;
     padding-left: 0;
   }
 
   .backImage {
     display: block;
     position: absolute;
-    top: 23px;
-    left: 27px;
+    top: 25px;
+    left: 33px;
+  }
+
+  .avatar {
+    width: 187px;
+    height: 187px;
+    border-radius: 50%;
   }
 
   .parnter {

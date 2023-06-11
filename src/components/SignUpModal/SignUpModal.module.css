@@ -53,6 +53,7 @@ input {
   background: #512689;
   font-size: 16px;
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 .errorInput {
