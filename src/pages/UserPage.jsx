@@ -1,10 +1,10 @@
-import UserHeader from '../components/UserHeader/UserHeader';
+import Header from '../components/Header/Header';
 import UserInfo from '../components/UserInfo/UserInfo';
 
 function UserPage() {
   return (
     <>
-      <UserHeader />
+      <Header />
       <UserInfo />
     </>
   );

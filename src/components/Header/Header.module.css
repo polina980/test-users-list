@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 265px;
+  padding: 64px 0;
   gap: 16px;
   background: #512689;
 }
@@ -26,15 +26,41 @@ h1 {
   cursor: default;
 }
 
+.user {
+  display: flex;
+  text-align: left;
+  gap: 32px;
+  margin: -25px 0 -25px -468px;
+}
+
+.avatar {
+  width: 187px;
+  height: 187px;
+  border-radius: 50%;
+}
+
+.parnterName {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+}
+
+.parnter {
+  font-size: 32px;
+  color: #FFFFFF;
+  cursor: default;
+}
+
+.backImage {
+  display: none;
+}
+
 .exitImage {
   display: none;
 }
 
 @media screen and (max-width: 768px) {
-  .header {
-    height: 281px;
-  }
-
   h1 {
     font-size: 36px;
   }
@@ -44,10 +70,42 @@ h1 {
     font-size: 16px;
   }
 
+  .user {
+    flex-direction: column-reverse;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    padding-left: 0;
+    margin: 0;
+  }
+
+  .backImage {
+    display: block;
+    position: absolute;
+    top: 25px;
+    left: 33px;
+    border: 0;
+    padding: 0;
+    background: transparent;
+  }
+
+  .avatar {
+    width: 187px;
+    height: 187px;
+    border-radius: 50%;
+  }
+
+  .parnter {
+    font-size: 20px;
+  }
+
   .exitImage {
     display: block;
     position: absolute;
     top: 23px;
     right: 27px;
+    border: 0;
+    padding: 0;
+    background: transparent;
   }
 }

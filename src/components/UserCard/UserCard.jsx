@@ -35,6 +35,7 @@ function UserCard() {
   };
 
   const handleUserClick = (user) => {
+    localStorage.setItem('selectedUser', JSON.stringify(user));
     dispatch(setSelectedUser(user));
   };
 

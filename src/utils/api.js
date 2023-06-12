@@ -1,6 +1,6 @@
 export const apiConfig = {
-  baseUrl: 'https://reqres.in/api',
-  users: '/users?page=2',
+  baseUrl: 'https://reqres.in',
+  users: '/api/users?page=2',
   defaultHeaders: {
     'Content-Type': 'application/json'
   }

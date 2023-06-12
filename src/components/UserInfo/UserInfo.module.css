@@ -9,6 +9,7 @@
 .description {
   width: 630px;
   margin-top: 0;
+  line-height: 21.79px;
 }
 
 figcaption {
@@ -29,8 +30,12 @@ figcaption:last-of-type {
     gap: 0;
   }
 
+  aside {
+    margin-bottom: 11px;
+  }
+
   .description {
     width: 343px;
-    margin-top: 34px;
+    margin-top: 26px;
   }
 }
