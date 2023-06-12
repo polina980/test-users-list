@@ -24,9 +24,19 @@ function SignUpModal() {
   const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password } = formData;
+    const { email, password, confirmPassword } = formData;
 
-    if (isValidForm && !formErrors.emailError && !formErrors.passwordError) {
+    const emailError = validateEmail(email);
+    const passwordError = validatePassword(password);
+    const confirmPasswordError = validateConfirmPassword(password, confirmPassword);
+
+    setFormErrors({
+      emailError,
+      passwordError,
+      confirmPasswordError
+    });
+
+    if (!emailError && !passwordError && !confirmPasswordError) {
       localStorage.setItem('email', email);
       localStorage.setItem('password', password);
       navigate('/users');
@@ -39,36 +49,41 @@ function SignUpModal() {
       ...prevData,
       [name]: value
     }));
-  };
-
-  const handleBlur = (event) => {
-    const { name, value } = event.target;
 
     if (name === 'email') {
       const emailError = validateEmail(value);
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        emailError
-      }));
-      setIsValidForm(prevValidForm => prevValidForm && !emailError && !formErrors.passwordError);
+      setFormErrors((prevErrors) => {
+        const newErrors = {
+          ...prevErrors,
+          emailError
+        };
+        setIsValidForm(() => !newErrors.emailError && !newErrors.passwordError);
+        return newErrors;
+      });
     }
 
     if (name === 'password') {
       const passwordError = validatePassword(value);
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        passwordError
-      }));
-      setIsValidForm(prevValidForm => prevValidForm && !formErrors.emailError && !passwordError);
+      setFormErrors((prevErrors) => {
+        const newErrors = {
+          ...prevErrors,
+          passwordError
+        };
+        setIsValidForm(() => !prevErrors.emailError && !newErrors.passwordError);
+        return newErrors;
+      });
     }
 
     if (name === 'confirmPassword') {
       const confirmPasswordError = validateConfirmPassword(formData.password, value);
-      setFormErrors((prevErrors) => ({
-        ...prevErrors,
-        confirmPasswordError
-      }));
-      setIsValidForm(!formErrors.emailError && !formErrors.passwordError && !confirmPasswordError);
+      setFormErrors((prevErrors) => {
+        const newErrors = {
+          ...prevErrors,
+          confirmPasswordError
+        };
+        setIsValidForm(() => !prevErrors.emailError && !prevErrors.passwordError && !newErrors.confirmPasswordError);
+        return newErrors;
+      });
     }
   };
 
@@ -93,7 +108,6 @@ function SignUpModal() {
             name="name"
             value={formData.name}
             onChange={handleChange}
-            onBlur={handleBlur}
             onFocus={focusHandler}
           />
         </label>
@@ -106,7 +120,6 @@ function SignUpModal() {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            onBlur={handleBlur}
             onFocus={focusHandler}
           />
           {formErrors.emailError && (
@@ -122,7 +135,6 @@ function SignUpModal() {
             name="password"
             value={formData.password}
             onChange={handleChange}
-            onBlur={handleBlur}
             onFocus={focusHandler}
           />
           {formErrors.passwordError && (
@@ -138,7 +150,6 @@ function SignUpModal() {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleChange}
-            onBlur={handleBlur}
             onFocus={focusHandler}
           />
           {formErrors.confirmPasswordError && (
