@@ -5,17 +5,9 @@
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 64px 0;
+  height: 265px;
   gap: 16px;
   background: #512689;
-}
-
-h1 {
-  font-size: 64px;
-  font-weight: 400;
-  margin: 0;
-  color: #FFFFFF;
-  cursor: default;
 }
 
 .description {
@@ -26,24 +18,23 @@ h1 {
   cursor: default;
 }
 
-.user {
-  display: flex;
-  text-align: left;
-  gap: 32px;
-  margin: -25px 0 -25px -468px;
-}
-
 .avatar {
+  position: fixed;
+  top: 39px;
+  left: 188px;
   width: 187px;
   height: 187px;
   border-radius: 50%;
 }
 
 .parnterName {
+  position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 15px;
+  align-items: start;
+  top: 68px;
+  left: 407px;
+  gap: 16px;
 }
 
 .parnter {
@@ -61,6 +52,11 @@ h1 {
 }
 
 @media screen and (max-width: 768px) {
+  .header {
+    height: fit-content;
+    padding: 64px 0;
+  }
+
   h1 {
     font-size: 36px;
   }
@@ -68,15 +64,6 @@ h1 {
   .description {
     width: 334px;
     font-size: 16px;
-  }
-
-  .user {
-    flex-direction: column-reverse;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
-    padding-left: 0;
-    margin: 0;
   }
 
   .backImage {
@@ -90,9 +77,17 @@ h1 {
   }
 
   .avatar {
+    position: inherit;
+    margin-bottom: -4.5px;
     width: 187px;
     height: 187px;
     border-radius: 50%;
+  }
+
+  .parnterName {
+    position: inherit;
+    align-items: center;
+    margin-bottom: 16px;
   }
 
   .parnter {

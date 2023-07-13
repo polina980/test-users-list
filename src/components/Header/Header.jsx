@@ -7,6 +7,7 @@ import BackImage from '../../images/arrow-left.svg';
 import { useSelector, useDispatch } from 'react-redux';
 import { getSelectedUser } from '../../services/selectors/userSelectors';
 import { setSelectedUser, clearSelectedUser } from '../../services/actions/userActions';
+import { specialists } from '../../utils/constants';
 
 const positionLeft = {
   top: '31px',
@@ -62,12 +63,12 @@ function Header() {
             <img src={BackImage} alt="Назад" />
           </button>
           {selectedUser && (
-            <div className={styles.user}>
-              <img src={selectedUser.avatar} alt="Avatar" className={styles.avatar} />
+            <div>
               <div className={styles.parnterName}>
                 <h1>{selectedUser.first_name} {selectedUser.last_name}</h1>
-                <span className={styles.parnter}>Партнер</span>
+                <span className={styles.parnter}>{specialists.find(specialist => specialist.id === selectedUser.id).position}</span>
               </div>
+              <img src={selectedUser.avatar} alt="Avatar" className={styles.avatar} />
             </div>
           )}
           <Button title="Выход" style={positionRight} onClick={handleLogout} />

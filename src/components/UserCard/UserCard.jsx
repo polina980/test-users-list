@@ -7,6 +7,8 @@ import { getUsers } from '../../services/selectors/userSelectors';
 
 function UserCard() {
   const [likedUsers, setLikedUsers] = useState([]);
+  const [visibleUsers, setVisibleUsers] = useState(4);
+  const [totalUsers, setTotalUsers] = useState(0);
 
   useEffect(() => {
     const savedLikedUsers = localStorage.getItem('likedUsers');
@@ -26,6 +28,10 @@ function UserCard() {
     dispatch(fetchUsers());
   }, [dispatch]);
 
+  useEffect(() => {
+    setTotalUsers(users.length);
+  }, [users]);
+
   const handleLike = (index) => {
     if (likedUsers.includes(index)) {
       setLikedUsers(likedUsers.filter((item) => item !== index));
@@ -39,10 +45,18 @@ function UserCard() {
     dispatch(setSelectedUser(user));
   };
 
+  const handleShowMore = () => {
+    setVisibleUsers(visibleUsers + 4);
+  };
+
+  const handleShowLess = () => {
+    setVisibleUsers(4);
+  };
+
   return (
     <>
       <div className={styles.cards}>
-        {users.map((user, index) => (
+        {users.slice(0, visibleUsers).map((user, index) => (
           <div key={index} className={styles.card}>
             <Link to="/about" onClick={() => handleUserClick(user)} className={styles.user}>
               <img src={user.avatar} alt="Avatar" className={styles.avatar} />
@@ -56,7 +70,11 @@ function UserCard() {
           </div>
         ))}
       </div>
-      <button type="button" className={styles.buttonMore}>Показать еще</button>
+      {visibleUsers < totalUsers ? (
+        <button type="button" className={styles.buttonMore} onClick={handleShowMore}>Показать еще</button>
+      ) : (
+        <button type="button" className={`${styles.buttonMore} ${styles.less}`} onClick={handleShowLess}>Свернуть</button>
+      )}
     </>
   );
 }

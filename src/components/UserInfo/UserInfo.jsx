@@ -1,48 +1,38 @@
 import styles from './UserInfo.module.css';
+import { useSelector } from 'react-redux';
+import { getSelectedUser } from '../../services/selectors/userSelectors';
+import { specialists } from '../../utils/constants';
 import PhoneImage from '../../images/phone.svg';
 import EmailImage from '../../images/email.svg';
 
 function UserInfo() {
+  const selectedUser = useSelector(getSelectedUser);
+
+  if (!selectedUser) {
+    return null
+  }
+
   return (
     <section className={styles.info}>
-      <div>
-        <p className={styles.description}>
-          Клиенты видят в нем эксперта по вопросам разработки комплексных решений
-          финансовых продуктов, включая такие аспекты, как организационная структура,
-          процессы, аналитика и ИТ-компоненты. Он помогает клиентам лучше понимать
-          структуру рисков их бизнеса, улучшать процессы за счет применения новейших
-          технологий и увеличивать продажи, используя самые современные аналитические
-          инструменты.
-        </p>
-        <p className={styles.description}>
-          В работе с клиентами недостаточно просто решить конкретную проблему или
-          помочь справиться с трудностями. Не менее важно уделять внимание обмену
-          знаниями: "Один из самых позитивных моментов — это осознание того, что ты
-          помог клиенту перейти на совершенно новый уровень компетентности, уверенность
-          в том, что после окончания проекта у клиента есть все необходимое, чтобы дальше
-          развиваться самостоятельно".
-        </p>
-        <p className={styles.description}>
-          Помимо разнообразных проектов для клиентов финансового сектора, Сорин ведет
-          активную предпринимательскую деятельность. Он является совладельцем сети
-          клиник эстетической медицины в Швейцарии, предлагающей инновационный подход
-          к красоте, а также инвестором других бизнес-проектов.
-        </p>
-      </div>
       <aside>
-        <figcaption>
+        <figure className={styles.figure}>
           <img src={PhoneImage} alt="Телефон" />
           <figcaption>
-            +7 (954) 333-44-55
+            <p className={styles.text}>{specialists.find(specialist => specialist.id === selectedUser.id).phone}</p>
           </figcaption>
-        </figcaption>
-        <figcaption>
+        </figure>
+        <figure className={styles.figure}>
           <img src={EmailImage} alt="Почта" />
           <figcaption>
-            sykfafkar@gmail.com
+            <p className={styles.text}>{selectedUser.email}</p>
           </figcaption>
-        </figcaption>
+        </figure>
       </aside>
+      <ul className={styles.list}>
+        <li className={styles.description}>
+          <p className={styles.text}>{specialists.find(specialist => specialist.id === selectedUser.id).description}</p>
+        </li>
+      </ul>
     </section>
   );
 }

@@ -1,41 +1,48 @@
 .info {
   display: flex;
   flex-wrap: wrap;
-  width: fit-content;
-  margin: 49px auto 0;
-  gap: 130.5px;
+  flex-direction: row-reverse;
+  justify-content: start;
+  margin: 49px auto 0 188px;
+}
+
+.list {
+  list-style-type: none;
+  margin: 0 129px 0 0;
+  padding: 0;
 }
 
 .description {
   width: 630px;
-  margin-top: 0;
   line-height: 21.79px;
 }
 
-figcaption {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
+.text {
+  margin: 0;
 }
 
-figcaption:last-of-type {
-  margin-bottom: 0;
+.figure {
+  display: flex;
+  gap: 8px;
+  margin: 0 0 24px 0;
+}
+
+.figure:last-of-type {
+  margin: 0 0 32px 0;
 }
 
 @media screen and (max-width: 768px) {
   .info {
-    flex-direction: column-reverse;
-    width: fit-content;
-    margin: 33px auto 0;
-    gap: 0;
+    flex-wrap: wrap;
+    margin: 32px 16px;
   }
 
-  aside {
-    margin-bottom: 11px;
+  .list {
+    margin: 0;
   }
 
   .description {
     width: 343px;
-    margin-top: 26px;
+    margin: 0 auto;
   }
 }
