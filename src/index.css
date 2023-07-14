@@ -11,3 +11,9 @@ h1 {
   color: #FFFFFF;
   cursor: default;
 }
+
+@media screen and (max-width: 768px) {
+  h1 {
+    font-size: 36px;
+  }
+}

@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import ModalOverlay from '../ModalOverlay/ModalOverlay.jsx';
 import styles from './SignUpModal.module.css';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../../utils/validation.js';
 
@@ -20,6 +19,17 @@ function SignUpModal() {
   });
 
   const [isValidForm, setIsValidForm] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState({
+    password: false,
+    confirmPassword: false
+  });
+
+  const isActive = formData.email &&
+    formData.password &&
+    formData.confirmPassword &&
+    !formErrors.emailError &&
+    !formErrors.passwordError &&
+    !formErrors.confirmPasswordError;
 
   const navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -95,79 +105,99 @@ function SignUpModal() {
     }));
   };
 
+  const togglePasswordVisible = (inputName) => {
+    setIsPasswordVisible((prevState) => ({
+      ...prevState,
+      [inputName]: !prevState[inputName]
+    }));
+  };
+
   return createPortal(
-    <>
-      <ModalOverlay />
-      <form className={styles.form}>
-        <h1 className={styles.title}>Регистрация</h1>
-        <label>
-          Имя
+    <form className={styles.form}>
+      <h1 className={styles.title}>Регистрация</h1>
+      <label>
+        Имя
+        <input
+          type="text"
+          placeholder="Артур"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          onFocus={focusHandler}
+        />
+      </label>
+      <label>
+        Электронная почта
+        <input
+          type="email"
+          className={formErrors.emailError && styles.errorInput}
+          placeholder="example@mail.ru"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          onFocus={focusHandler}
+        />
+        {formErrors.emailError && (
+          <div className={styles.errorText}>{formErrors.emailError}</div>
+        )}
+      </label>
+      <label>
+        Пароль
+        <div className={styles.inputContainer}>
           <input
-            type="text"
-            placeholder="Артур"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            onFocus={focusHandler}
-          />
-        </label>
-        <label>
-          Электронная почта
-          <input
-            type="email"
-            className={formErrors.emailError && styles.errorInput}
-            placeholder="example@mail.ru"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            onFocus={focusHandler}
-          />
-          {formErrors.emailError && (
-            <div className={styles.errorText}>{formErrors.emailError}</div>
-          )}
-        </label>
-        <label>
-          Пароль
-          <input
-            type="password"
+            type={isPasswordVisible.password ? "text" : "password"}
             placeholder="******"
             className={styles.password}
             name="password"
             value={formData.password}
+            autoComplete="off"
             onChange={handleChange}
             onFocus={focusHandler}
           />
-          {formErrors.passwordError && (
-            <div className={styles.errorText}>{formErrors.passwordError}</div>
-          )}
-        </label>
-        <label>
-          Подтвердите пароль
+          <figure
+            className={`${styles.inputFigure} ${!isPasswordVisible.password ? styles.hidden : styles.visible
+              }`}
+            onClick={() => togglePasswordVisible("password")}
+          />
+        </div>
+        {formErrors.passwordError && (
+          <div className={styles.errorText}>{formErrors.passwordError}</div>
+        )}
+      </label>
+      <label>
+        Подтвердите пароль
+        <div className={styles.inputContainer}>
           <input
-            type="password"
+            type={isPasswordVisible.confirmPassword ? "text" : "password"}
             placeholder="******"
             className={styles.password}
             name="confirmPassword"
             value={formData.confirmPassword}
+            autoComplete="off"
             onChange={handleChange}
             onFocus={focusHandler}
           />
-          {formErrors.confirmPasswordError && (
-            <div className={styles.errorText}>
-              {formErrors.confirmPasswordError}
-            </div>
-          )}
-        </label>
-
-        <button
-          onClick={handleSubmit}
-          disabled={!isValidForm}
-          className={styles.modalButton}
-        >
-          Зарегистрироваться
-        </button>
-      </form>
-    </>,
+          <figure
+            className={`${styles.inputFigure} ${!isPasswordVisible.confirmPassword ? styles.hidden : styles.visible
+              }`}
+            onClick={() => togglePasswordVisible("confirmPassword")}
+          />
+        </div>
+        {formErrors.confirmPasswordError && (
+          <div className={styles.errorText}>
+            {formErrors.confirmPasswordError}
+          </div>
+        )}
+      </label>
+      <button
+        type="button"
+        onClick={handleSubmit}
+        disabled={!isValidForm}
+        className={`${styles.modalButton} ${isActive ? styles.active : ''}`}
+      >
+        Зарегистрироваться
+      </button>
+    </form>,
     document.getElementById('modal')
   );
 }

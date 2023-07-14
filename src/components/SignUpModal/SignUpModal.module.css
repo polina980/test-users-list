@@ -9,6 +9,7 @@
   transform: translate(-50%, -50%);
   padding: 16px;
   gap: 16px;
+  background-color: white;
   color: #151317;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.08);
 }
@@ -28,31 +29,53 @@ label {
 }
 
 input {
-  height: 46px;
+  width: 403px;
+  height: 48px;
   border: 0;
   border-radius: 8px;
-  padding: 0 8px 0 16px;
+  padding: 0px 48px 0 17px;
   background: #F8F8F8;
   color: #808185;
 }
 
-.password {
-  background-image: url(./../../images/eye-off.svg);
-  background-repeat: no-repeat;
-  background-position-x: 438px;
-  background-position-y: center;
-  padding-right: 40px;
+.inputContainer {
+  width: 100%;
+  position: relative;
+}
+
+.inputFigure {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 8px;
+  bottom: 11px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.hidden {
+  background: url(../../images/eye-visible.svg) no-repeat center;
+}
+
+.visible {
+  background: url(../../images/eye-hidden.svg) no-repeat center;
 }
 
 .modalButton {
   height: 48px;
-  border: 0;
+  border: 1px solid #151317;
   border-radius: 8px;
   margin-top: 8px;
-  background: #512689;
+  background: #F8F8F8;
   font-size: 16px;
-  color: #FFFFFF;
+  color: #151317;
   cursor: pointer;
+}
+
+.active {
+  border: 0;
+  background: #512689;
+  color: #FFFFFF;
 }
 
 .errorInput {
@@ -67,5 +90,9 @@ input {
 @media screen and (max-width: 768px) {
   .form {
     width: 343px;
+  }
+
+  input {
+    width: 278px;
   }
 }

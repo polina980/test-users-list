@@ -11,20 +11,41 @@
 }
 
 .description {
-  width: 846px;
+  max-width: 846px;
   font-size: 20px;
   margin: 0;
   color: #F8F8F8;
   cursor: default;
 }
 
-.avatar {
+.avatarContainer {
   position: fixed;
+  width: 187px;
+  height: 187px;
   top: 39px;
   left: 188px;
+}
+
+.avatar {
+  position: absolute;
+  left: 0;
   width: 187px;
   height: 187px;
   border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatarEdit {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  right: 0;
+  bottom: 8px;
+  background: url(../../images/edit.svg) center no-repeat;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .parnterName {
@@ -57,12 +78,8 @@
     padding: 64px 0;
   }
 
-  h1 {
-    font-size: 36px;
-  }
-
   .description {
-    width: 334px;
+    max-width: 334px;
     font-size: 16px;
   }
 
@@ -76,11 +93,15 @@
     background: transparent;
   }
 
+  .avatarContainer {
+    position: relative;
+    margin: auto;
+    top: 0;
+    left: 0;
+  }
+
   .avatar {
-    position: inherit;
     margin-bottom: -4.5px;
-    width: 187px;
-    height: 187px;
     border-radius: 50%;
   }
 

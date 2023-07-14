@@ -1,16 +1,16 @@
-import styles from './UserInfo.module.css';
 import { useSelector } from 'react-redux';
-import { getSelectedUser } from '../../services/selectors/userSelectors';
-import { specialists } from '../../utils/constants';
+import styles from './UserInfo.module.css';
 import PhoneImage from '../../images/phone.svg';
 import EmailImage from '../../images/email.svg';
+import { getSelectedUser } from '../../services/selectors/userSelectors';
+import { specialists } from '../../utils/constants';
 
 function UserInfo() {
   const selectedUser = useSelector(getSelectedUser);
 
   if (!selectedUser) {
     return null
-  }
+  };
 
   return (
     <section className={styles.info}>
