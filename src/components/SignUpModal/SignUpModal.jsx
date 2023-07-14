@@ -3,8 +3,14 @@ import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
 import styles from './SignUpModal.module.css';
 import { validateEmail, validatePassword, validateConfirmPassword } from '../../utils/validation.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUserLogin } from '../../services/actions/loginAction';
+import { loginUser } from '../../services/selectors/loginSelector';
 
 function SignUpModal() {
+  const dispatch = useDispatch();
+  const auth = useSelector(loginUser);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,10 +38,12 @@ function SignUpModal() {
     !formErrors.confirmPasswordError;
 
   const navigate = useNavigate();
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const { email, password, confirmPassword } = formData;
 
+  const handleLogin = (event) => {
+    event.preventDefault();
+    dispatch(getUserLogin(formData.email, formData.password));
+
+    const { email, password, confirmPassword } = formData;
     const emailError = validateEmail(email);
     const passwordError = validatePassword(password);
     const confirmPasswordError = validateConfirmPassword(password, confirmPassword);
@@ -45,13 +53,7 @@ function SignUpModal() {
       passwordError,
       confirmPasswordError
     });
-
-    if (!emailError && !passwordError && !confirmPasswordError) {
-      localStorage.setItem('email', email);
-      localStorage.setItem('password', password);
-      navigate('/users');
-    }
-  };
+  }
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -111,6 +113,10 @@ function SignUpModal() {
       [inputName]: !prevState[inputName]
     }));
   };
+
+  if (auth) {
+    navigate('/users')
+  }
 
   return createPortal(
     <form className={styles.form}>
@@ -191,7 +197,7 @@ function SignUpModal() {
       </label>
       <button
         type="button"
-        onClick={handleSubmit}
+        onClick={handleLogin}
         disabled={!isValidForm}
         className={`${styles.modalButton} ${isActive ? styles.active : ''}`}
       >

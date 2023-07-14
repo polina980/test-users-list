@@ -6,8 +6,8 @@ import AvatarModal from '../AvatarModal/AvatarModal';
 import Button from '../Button/Button';
 import ExitImage from '../../images/exit.svg';
 import BackImage from '../../images/arrow-left.svg';
-import { setSelectedUser, clearSelectedUser } from '../../services/actions/userActions';
-import { getSelectedUser } from '../../services/selectors/userSelectors';
+import { setSelectedUser, clearSelectedUser } from '../../services/actions/usersAction';
+import { getSelectedUser } from '../../services/selectors/usersSelector';
 import { specialists } from '../../utils/constants';
 
 const positionLeft = {
@@ -31,8 +31,8 @@ function Header() {
 
   const handleLogout = () => {
     localStorage.removeItem('likedUsers');
-    localStorage.removeItem('email');
-    localStorage.removeItem('password');
+    localStorage.removeItem('token');
+    localStorage.removeItem('selectedUser');
     setIsLoggedOut(true);
     navigate('/');
   };

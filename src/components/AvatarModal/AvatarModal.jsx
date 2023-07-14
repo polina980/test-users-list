@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './AvatarModal.module.css';
 import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import { getSelectedUser } from '../../services/selectors/userSelectors';
+import { getSelectedUser } from '../../services/selectors/usersSelector';
 
 function AvatarModal({ avatarUrl, setAvatarUrl, setIsModalOpen }) {
   const [isInputEmpty, setIsInputEmpty] = useState(true);

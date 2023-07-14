@@ -11,3 +11,7 @@
 `npm start`
 
 <!-- ### Доработка проекта будет включать: -->
+
+### Для входа на сайт введите:
+`email: eve.holt@reqres.in`
+`password: cityslicka`

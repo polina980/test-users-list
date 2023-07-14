@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate } from 'react-router-dom';
 
 const ProtectedRoute = ({ children, fallbackPath = '/' }) => {
-  const isLoggedIn = localStorage.getItem('email') && localStorage.getItem('password');
+  const isLoggedIn = localStorage.getItem('token');
 
   if (!isLoggedIn) {
     return <Navigate to={fallbackPath} replace />;

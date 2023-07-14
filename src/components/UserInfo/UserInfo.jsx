@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import styles from './UserInfo.module.css';
 import PhoneImage from '../../images/phone.svg';
 import EmailImage from '../../images/email.svg';
-import { getSelectedUser } from '../../services/selectors/userSelectors';
+import { getSelectedUser } from '../../services/selectors/usersSelector';
 import { specialists } from '../../utils/constants';
 
 function UserInfo() {
