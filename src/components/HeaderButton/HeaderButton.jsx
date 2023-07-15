@@ -1,6 +1,6 @@
-import styles from './Button.module.css';
+import styles from './HeaderButton.module.css';
 
-function Button({ title, style, onClick }) {
+function HeaderButton({ title, style, onClick }) {
   return (
     <button
       type="button"
@@ -11,6 +11,6 @@ function Button({ title, style, onClick }) {
       {title}
     </button>
   );
-}
+};
 
-export default Button;
+export default HeaderButton;

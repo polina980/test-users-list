@@ -1,41 +1,35 @@
 import { apiUsers } from '../../utils/api';
 
+const getDelayedUsersSuccess = (delayedUsers) => {
+  return {
+    type: 'GET_DELAYED_USERS_SUCCESS',
+    payload: delayedUsers,
+  };
+};
+
+// const getDelayedSelectedUser = (delayedSelectedUser) => {
+//   return {
+//     type: 'GET_DELAYED_SELECTED_USER',
+//     payload: delayedSelectedUser,
+//   };
+// };
+
+const getDelayedUsersFailure = (error) => {
+  return {
+    type: 'GET_DELAYED_USERS_FAILURE',
+    payload: error,
+  };
+};
+
 export const fetchDelayedUsers = () => {
   return async (dispatch) => {
     try {
       const response = await apiUsers.getDelayedUsers();
       const { data } = response;
-      dispatch(fetchDelayedUsersSuccess(data));
+      dispatch(getDelayedUsersSuccess(data));
     } catch (error) {
       console.error(error);
-      dispatch(fetchDelayedUsersFailure(error.message));
+      dispatch(getDelayedUsersFailure(error.message));
     }
-  };
-};
-
-export const fetchDelayedUsersSuccess = (delayedUsers) => {
-  return {
-    type: 'FETCH_DELAYED_USERS_SUCCESS',
-    payload: delayedUsers,
-  };
-};
-
-export const fetchDelayedUsersFailure = (error) => {
-  return {
-    type: 'FETCH_DELAYED_USERS_FAILURE',
-    payload: error,
-  };
-};
-
-export const setDelayedSelectedUser = (delayedUser) => {
-  return {
-    type: 'SET_DELAYED_SELECTED_USER',
-    payload: delayedUser,
-  };
-};
-
-export const clearDelayedSelectedUser = () => {
-  return {
-    type: 'CLEAR_DELAYED_SELECTED_USER',
   };
 };

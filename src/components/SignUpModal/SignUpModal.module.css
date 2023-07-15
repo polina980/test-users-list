@@ -61,23 +61,6 @@ input {
   background: url(../../images/eye-hidden.svg) no-repeat center;
 }
 
-.modalButton {
-  height: 48px;
-  border: 1px solid #151317;
-  border-radius: 8px;
-  margin-top: 8px;
-  background: #F8F8F8;
-  font-size: 16px;
-  color: #151317;
-  cursor: pointer;
-}
-
-.active {
-  border: 0;
-  background: #512689;
-  color: #FFFFFF;
-}
-
 .errorInput {
   border: 1px solid #FF6161;
 }

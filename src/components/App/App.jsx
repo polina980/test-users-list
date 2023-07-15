@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from '../../pages/LoginPage.jsx';
+import RegisterPage from '../../pages/RegisterPage.jsx';
 import MainPage from '../../pages/MainPage.jsx';
 import UserPage from '../../pages/UserPage.jsx';
 import ProtectedRoute from '../../utils/router/ProtectedRoute.js';
@@ -7,7 +7,7 @@ import ProtectedRoute from '../../utils/router/ProtectedRoute.js';
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<LoginPage />} />
+      <Route path='/' element={<RegisterPage />} />
       <Route
         path='/users'
         element={
@@ -26,6 +26,6 @@ function App() {
       />
     </Routes>
   );
-}
+};
 
 export default App;

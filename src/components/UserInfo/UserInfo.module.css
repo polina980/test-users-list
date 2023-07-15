@@ -6,19 +6,15 @@
   margin: 49px auto 0 188px;
 }
 
-.list {
-  list-style-type: none;
+.text {
+  max-width: 630px;
   margin: 0 129px 0 0;
-  padding: 0;
-}
-
-.description {
-  width: 630px;
   line-height: 21.79px;
 }
 
-.text {
+.asideText {
   margin: 0;
+  line-height: 21.79px;
 }
 
 .figure {
@@ -37,12 +33,8 @@
     margin: 32px 16px;
   }
 
-  .list {
+  .text {
+    min-width: 343px;
     margin: 0;
-  }
-
-  .description {
-    width: 343px;
-    margin: 0 auto;
   }
 }

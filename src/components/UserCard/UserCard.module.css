@@ -50,7 +50,7 @@
   cursor: pointer;
 }
 
-.like.active {
+.active {
   background-image: url(../../images/like-active.svg);
 }
 

@@ -2,18 +2,18 @@ export const apiConfig = {
   baseUrl: 'https://reqres.in',
   users: '/api/users?delay=3',
   delayedUsers: '/api/users?page=2',
-  login: '/api/login',
+  register: '/api/register',
   defaultHeaders: {
     'Content-Type': 'application/json'
   }
 };
 
 class Api {
-  constructor({ baseUrl, users, delayedUsers, login, defaultHeaders }) {
+  constructor({ baseUrl, users, delayedUsers, register, defaultHeaders }) {
     this._baseUrl = baseUrl;
     this._usersEndpoint = users;
     this._delayedUsersEndpoint = delayedUsers;
-    this._loginEndpoint = login;
+    this._registerEndpoint = register;
     this._defaultHeaders = defaultHeaders;
   }
 
@@ -46,7 +46,7 @@ class Api {
       .then(this._handleResponse);
   }
 
-  loginUser(email, password) {
+  registerUser(email, password) {
     const options = {
       method: 'POST',
       headers: this._defaultHeaders,
@@ -55,7 +55,7 @@ class Api {
         password
       })
     };
-    return fetch(this._makeUrl(this._loginEndpoint), options)
+    return fetch(this._makeUrl(this._registerEndpoint), options)
       .then(this._handleResponse);
   }
 }

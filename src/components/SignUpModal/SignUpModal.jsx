@@ -1,15 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
-import styles from './SignUpModal.module.css';
-import { validateEmail, validatePassword, validateConfirmPassword } from '../../utils/validation.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserLogin } from '../../services/actions/loginAction';
-import { loginUser } from '../../services/selectors/loginSelector';
+import { getUserRegister } from '../../services/actions/registerAction';
+import { registerUser } from '../../services/selectors/registerSelector';
+import { validateEmail, validatePassword, validateConfirmPassword } from '../../utils/validation';
+import styles from './SignUpModal.module.css';
+import ModalButton from '../ModalButton/ModalButton';
 
 function SignUpModal() {
+  const auth = useSelector(registerUser);
   const dispatch = useDispatch();
-  const auth = useSelector(loginUser);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/users');
+    }
+  }, [auth, navigate]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -37,11 +45,9 @@ function SignUpModal() {
     !formErrors.passwordError &&
     !formErrors.confirmPasswordError;
 
-  const navigate = useNavigate();
-
-  const handleLogin = (event) => {
+  const handleRegister = (event) => {
     event.preventDefault();
-    dispatch(getUserLogin(formData.email, formData.password));
+    dispatch(getUserRegister(formData.email, formData.password));
 
     const { email, password, confirmPassword } = formData;
     const emailError = validateEmail(email);
@@ -72,7 +78,7 @@ function SignUpModal() {
         setIsValidForm(() => !newErrors.emailError && !newErrors.passwordError);
         return newErrors;
       });
-    }
+    };
 
     if (name === 'password') {
       const passwordError = validatePassword(value);
@@ -84,7 +90,7 @@ function SignUpModal() {
         setIsValidForm(() => !prevErrors.emailError && !newErrors.passwordError);
         return newErrors;
       });
-    }
+    };
 
     if (name === 'confirmPassword') {
       const confirmPasswordError = validateConfirmPassword(formData.password, value);
@@ -96,7 +102,7 @@ function SignUpModal() {
         setIsValidForm(() => !prevErrors.emailError && !prevErrors.passwordError && !newErrors.confirmPasswordError);
         return newErrors;
       });
-    }
+    };
   };
 
   const focusHandler = (event) => {
@@ -114,10 +120,6 @@ function SignUpModal() {
     }));
   };
 
-  if (auth) {
-    navigate('/users')
-  }
-
   return createPortal(
     <form className={styles.form}>
       <h1 className={styles.title}>Регистрация</h1>
@@ -128,6 +130,7 @@ function SignUpModal() {
           placeholder="Артур"
           name="name"
           value={formData.name}
+          autoComplete="off"
           onChange={handleChange}
           onFocus={focusHandler}
         />
@@ -140,6 +143,7 @@ function SignUpModal() {
           placeholder="example@mail.ru"
           name="email"
           value={formData.email}
+          autoComplete="off"
           onChange={handleChange}
           onFocus={focusHandler}
         />
@@ -195,17 +199,10 @@ function SignUpModal() {
           </div>
         )}
       </label>
-      <button
-        type="button"
-        onClick={handleLogin}
-        disabled={!isValidForm}
-        className={`${styles.modalButton} ${isActive ? styles.active : ''}`}
-      >
-        Зарегистрироваться
-      </button>
+      <ModalButton title="Зарегистрироваться" onClick={handleRegister} active={isActive} disabled={!isValidForm} />
     </form>,
     document.getElementById('modal')
   );
-}
+};
 
 export default SignUpModal;

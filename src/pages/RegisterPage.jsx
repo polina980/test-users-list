@@ -1,9 +1,9 @@
 import SignUpModal from '../components/SignUpModal/SignUpModal';
 
-function LoginPage() {
+function RegisterPage() {
   return (
     <SignUpModal />
   );
 }
 
-export default LoginPage;
+export default RegisterPage;

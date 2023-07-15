@@ -1,5 +1,5 @@
-import styles from './Loader.module.css';
 import { BallTriangle } from 'react-loader-spinner';
+import styles from './Loader.module.css';
 
 function Loader() {
   return (
@@ -14,6 +14,6 @@ function Loader() {
       />
     </div>
   );
-}
+};
 
 export default Loader;

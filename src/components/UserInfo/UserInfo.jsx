@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
+import { getSelectedUser } from '../../services/selectors/usersSelector';
+import { specialists } from '../../utils/constants';
 import styles from './UserInfo.module.css';
 import PhoneImage from '../../images/phone.svg';
 import EmailImage from '../../images/email.svg';
-import { getSelectedUser } from '../../services/selectors/usersSelector';
-import { specialists } from '../../utils/constants';
 
 function UserInfo() {
   const selectedUser = useSelector(getSelectedUser);
@@ -18,23 +18,21 @@ function UserInfo() {
         <figure className={styles.figure}>
           <img src={PhoneImage} alt="Телефон" />
           <figcaption>
-            <p className={styles.text}>{specialists.find(specialist => specialist.id === selectedUser.id).phone}</p>
+            <p className={styles.asideText}>{specialists.find(specialist => specialist.id === selectedUser.id).phone}</p>
           </figcaption>
         </figure>
         <figure className={styles.figure}>
           <img src={EmailImage} alt="Почта" />
           <figcaption>
-            <p className={styles.text}>{selectedUser.email}</p>
+            <p className={styles.asideText}>{selectedUser.email}</p>
           </figcaption>
         </figure>
       </aside>
-      <ul className={styles.list}>
-        <li className={styles.description}>
-          <p className={styles.text}>{specialists.find(specialist => specialist.id === selectedUser.id).description}</p>
-        </li>
-      </ul>
+      <p className={styles.text}>
+        {specialists.find(specialist => specialist.id === selectedUser.id).description}
+      </p>
     </section>
   );
-}
+};
 
 export default UserInfo;

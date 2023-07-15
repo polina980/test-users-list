@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
-import styles from './Header.module.css';
-import AvatarModal from '../AvatarModal/AvatarModal';
-import Button from '../Button/Button';
-import ExitImage from '../../images/exit.svg';
-import BackImage from '../../images/arrow-left.svg';
-import { setSelectedUser, clearSelectedUser } from '../../services/actions/usersAction';
+import { fetchSelectedUser } from '../../services/actions/usersAction';
 import { getSelectedUser } from '../../services/selectors/usersSelector';
 import { specialists } from '../../utils/constants';
+import styles from './Header.module.css';
+import AvatarModal from '../AvatarModal/AvatarModal';
+import HeaderButton from '../HeaderButton/HeaderButton';
+import ExitImage from '../../images/exit.svg';
+import BackImage from '../../images/arrow-left.svg';
 
 const positionLeft = {
   top: '31px',
@@ -21,52 +21,46 @@ const positionRight = {
 };
 
 function Header() {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const selectedUser = useSelector(getSelectedUser);
-  const dispatch = useDispatch();
-  const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState(selectedUser?.avatar || '');
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleLogout = () => {
-    localStorage.removeItem('likedUsers');
-    localStorage.removeItem('token');
-    localStorage.removeItem('selectedUser');
-    setIsLoggedOut(true);
-    navigate('/');
-  };
-
-  const handleGoBack = () => {
-    dispatch(clearSelectedUser());
-    localStorage.removeItem('selectedUser');
-    navigate('/users');
-  };
 
   useEffect(() => {
     const storedUser = localStorage.getItem('selectedUser');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      dispatch(setSelectedUser(parsedUser));
+      dispatch(fetchSelectedUser(parsedUser));
       setAvatarUrl(parsedUser.avatar);
     }
-  }, [dispatch]);
-
-  if (isLoggedOut) {
-    return null;
-  }
-
-  const isUserHeader = location.pathname === '/about';
+  }, [dispatch, setAvatarUrl]);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
+  const handleGoBack = () => {
+    localStorage.removeItem('selectedUser');
+    navigate('/users');
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('likedUsers');
+    localStorage.removeItem('token');
+    localStorage.removeItem('id');
+    localStorage.removeItem('selectedUser');
+    window.location.reload();
+  };
+
+  const isUserHeader = location.pathname === '/about';
+
   return (
     <div className={styles.header}>
-      {isUserHeader && (
+      {isUserHeader ? (
         <>
-          <Button title="Назад" style={positionLeft} onClick={handleGoBack} />
+          <HeaderButton title="Назад" style={positionLeft} onClick={handleGoBack} />
           <button className={styles.backImage} onClick={handleGoBack}>
             <img src={BackImage} alt="Назад" />
           </button>
@@ -89,13 +83,12 @@ function Header() {
               </div>
             </div>
           )}
-          <Button title="Выход" style={positionRight} onClick={handleLogout} />
+          <HeaderButton title="Выход" style={positionRight} onClick={handleLogout} />
           <button className={styles.exitImage} onClick={handleLogout}>
             <img src={ExitImage} alt="Выход" />
           </button>
         </>
-      )}
-      {!isUserHeader && (
+      ) : (
         <>
           <h1>Наша команда</h1>
           <p className={styles.description}>
@@ -103,7 +96,7 @@ function Header() {
             которые ложатся на их плечи, и умеющие находить выход из любых,
             даже самых сложных ситуаций.
           </p>
-          <Button title="Выход" style={positionRight} onClick={handleLogout} />
+          <HeaderButton title="Выход" style={positionRight} onClick={handleLogout} />
           <button className={styles.exitImage} onClick={handleLogout}>
             <img src={ExitImage} alt="Выход" />
           </button>
@@ -111,6 +104,6 @@ function Header() {
       )}
     </div>
   );
-}
+};
 
 export default Header;
