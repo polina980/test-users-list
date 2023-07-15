@@ -75,7 +75,7 @@ function SignUpModal() {
           ...prevErrors,
           emailError
         };
-        setIsValidForm(() => !newErrors.emailError && !newErrors.passwordError);
+        setIsValidForm(() => !newErrors.emailError && !newErrors.passwordError && value.confirmPasswordError);
         return newErrors;
       });
     };
@@ -87,7 +87,7 @@ function SignUpModal() {
           ...prevErrors,
           passwordError
         };
-        setIsValidForm(() => !prevErrors.emailError && !newErrors.passwordError);
+        setIsValidForm(() => !prevErrors.emailError && !newErrors.passwordError && value.confirmPasswordError);
         return newErrors;
       });
     };
